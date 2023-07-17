@@ -2,9 +2,9 @@ import classNames from 'classnames'
 import React, { useState, useRef, useEffect } from 'react' // Added useEffect
 import { queryPrompt, getKnowledgeBase } from '../actions'
 
-export default function Chat(props) {
+export default function Chat({ selectedFile, setSelectedFile }) {
     const [messages, setMessages] = useState([])
-    const [selectedFile, setSelectedFile] = useState("")
+    // const [selectedFile, setSelectedFile] = useState("")
     const [files, setFiles] = useState([])
     const inputRef = useRef()
 
@@ -17,7 +17,7 @@ export default function Chat(props) {
         inputRef.current.value = ''
         
         queryPrompt(msg, selectedFile).then(res => { 
-            const response = res?.completion?.response || 'No result found from your knowledge base'
+            const response = res?.completion || 'No result found from your knowledge base'
             setMessages(prevInput => [...prevInput.slice(0, -1), response])
         })
     }

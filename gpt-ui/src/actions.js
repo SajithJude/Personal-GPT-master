@@ -3,7 +3,7 @@ export const queryPrompt = (prompt, indexName) => {
         search: prompt,
         index_name: indexName
     }).toString();
-    return fetch('http://localhost:5601/query?' + params)
+    return fetch('https://quizbot.flipick.com/query?' + params)
         .then(res => {
             if (!res.ok) {
                 throw new Error(`HTTP error, status = ${res.status}`);
@@ -16,14 +16,14 @@ export const queryPrompt = (prompt, indexName) => {
 };
 
 export const getKnowledgeBase = () => {
-    return fetch('http://localhost:5601/knowledge-base').then(res => res.json())
+    return fetch('https://quizbot.flipick.com/knowledge-base').then(res => res.json())
 }
 
 export const uploadFileToServer = (file) => {
     const formData = new FormData()
     formData.append('file', file)
 
-    return fetch('http://localhost:5601/file/upload', {
+    return fetch('https://quizbot.flipick.com/file/upload', {
         method: 'POST',
         body: formData
     }).catch(error => console.log(error))
